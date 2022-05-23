@@ -1,8 +1,8 @@
-const { validateHedEventWithDefinitions } = require('./event')
-const { parseHedStrings } = require('./stringParser')
+import { validateHedEventWithDefinitions } from './event/index.js'
+import { parseHedStrings } from './stringParser.js'
 
-const { generateIssue } = require('../common/issues/issues')
-const { filterNonEqualDuplicates } = require('../utils/map')
+import { generateIssue } from '../common/issues/issues.js'
+import { filterNonEqualDuplicates } from '../utils/map.js'
 
 /**
  * Parse the dataset's definitions and evaluate labels in the dataset.
@@ -163,10 +163,10 @@ const validateHedDatasetWithContext = function (
   //return validateDataset(definitions, newHedStrings, hedSchemas)
 }
 
-module.exports = {
-  parseDefinitions: parseDefinitions,
-  validateDataset: validateDataset,
-  validateHedEvents: validateHedEvents,
-  validateHedDataset: validateHedDataset,
-  validateHedDatasetWithContext: validateHedDatasetWithContext,
+export {
+  parseDefinitions,
+  validateDataset,
+  validateHedEvents,
+  validateHedDataset,
+  validateHedDatasetWithContext,
 }

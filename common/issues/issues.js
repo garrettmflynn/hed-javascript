@@ -1,9 +1,9 @@
-const issueData = require('./data')
+import issueData from './data.js'
 
 /**
  * A HED validation error or warning.
  */
-class Issue {
+export class Issue {
   /**
    * Constructor.
    * @param {string} internalCode The internal error code.
@@ -49,7 +49,7 @@ class Issue {
  * @param {object<string, (string|number[])>} parameters The error string parameters.
  * @return {Issue} An object representing the issue.
  */
-const generateIssue = function (internalCode, parameters) {
+export const generateIssue = function (internalCode, parameters) {
   const issueCodeData = issueData[internalCode] || issueData.genericError
   const { hedCode, level, message } = issueCodeData
   const bounds = parameters.bounds || []
@@ -57,9 +57,4 @@ const generateIssue = function (internalCode, parameters) {
   const parsedMessage = message(...bounds, parameters)
 
   return new Issue(internalCode, hedCode, level, parsedMessage)
-}
-
-module.exports = {
-  generateIssue: generateIssue,
-  Issue: Issue,
 }

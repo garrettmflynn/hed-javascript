@@ -1,9 +1,7 @@
-const types = require('./types')
-const TagEntry = types.TagEntry
-
-const { asArray } = require('../utils/array')
-const generateIssue = require('./issues')
-const splitHedString = require('./splitHedString')
+import {TagEntry} from './types.js'
+import { asArray } from '../utils/array.js'
+import generateIssue from './issues.js'
+import splitHedString from './splitHedString.js'
 
 const doubleSlashPattern = /[\s/]*\/+[\s/]*/g
 
@@ -324,11 +322,11 @@ const convertHedStringToShort = function (schemas, hedString) {
   return convertHedString(schemas, hedString, convertTagToShort)
 }
 
-module.exports = {
-  convertHedStringToShort: convertHedStringToShort,
-  convertHedStringToLong: convertHedStringToLong,
-  convertPartialHedStringToLong: convertPartialHedStringToLong,
-  convertTagToShort: convertTagToShort,
-  convertTagToLong: convertTagToLong,
-  removeSlashesAndSpaces: removeSlashesAndSpaces,
+export  {
+  convertHedStringToShort,
+  convertHedStringToLong,
+  convertPartialHedStringToLong,
+  convertTagToShort,
+  convertTagToLong,
+  removeSlashesAndSpaces,
 }

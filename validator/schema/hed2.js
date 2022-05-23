@@ -1,11 +1,11 @@
-const arrayUtils = require('../../utils/array')
+import * as arrayUtils from '../../utils/array.js'
 
 // TODO: Switch require once upstream bugs are fixed.
-// const xpath = require('xml2js-xpath')
+// const xpath from 'xml2js-xpath')
 // Temporary
-const xpath = require('../../utils/xpath')
+import * as xpath from '../../utils/xpath.js'
 
-const { SchemaAttributes } = require('./types')
+import { SchemaAttributes } from './types.js'
 
 const defaultUnitForTagAttribute = 'default'
 const defaultUnitForUnitClassAttribute = 'defaultUnits'
@@ -36,9 +36,9 @@ const unitModifierElement = 'unitModifier'
 
 const lc = (str) => str.toLowerCase()
 
-const { SchemaParser } = require('./parser')
+import { SchemaParser } from './parser.js'
 
-class Hed2SchemaParser extends SchemaParser {
+export class Hed2SchemaParser extends SchemaParser {
   parse() {
     this.populateDictionaries()
     return new SchemaAttributes(this)
@@ -206,8 +206,4 @@ class Hed2SchemaParser extends SchemaParser {
     }
     return [tags, tagElements]
   }
-}
-
-module.exports = {
-  Hed2SchemaParser: Hed2SchemaParser,
 }

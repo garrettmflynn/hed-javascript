@@ -3,6 +3,7 @@
   "version": "3.7.0",
   "description": "A JavaScript validator for HED (Hierarchical Event Descriptor) strings.",
   "main": "index.js",
+  "type": "module",
   "repository": {
     "type": "git",
     "url": "https://github.com/hed-standard/hed-javascript.git"
@@ -11,9 +12,16 @@
     "node": ">=12.12.0"
   },
   "scripts": {
+    "start": "which tinybuild && tinybuild",
+    "start-node": "npm run build-node && node ./examples/cjs/index.cjs",
+    "build": "npm run build-browser && npm run build-node",
+    "build-browser": "browserify index.js -p esmify -o ./dist/index.esm.js",
+    "build-node": "tinybuild bundle",
     "lint": "./node_modules/eslint/bin/eslint.js ./**/*.js",
-    "test": "./node_modules/.bin/jest",
-    "coverage": "./node_modules/.bin/jest --coverage"
+    "test": "NODE_OPTIONS=--experimental-vm-modules ./node_modules/.bin/jest",
+    "coverage": "NODE_OPTIONS=--experimental-vm-modules ./node_modules/.bin/jest --coverage",
+    "which": "which tinybuild"
+
   },
   "contributors": [
     "Alexander Jones",
@@ -27,10 +35,14 @@
   "dependencies": {
     "date-and-time": "^0.14.2",
     "date-fns": "^2.17.0",
+    "fast-xml-parser": "^4.0.7",
     "lodash": "^4.17.21",
+    "node-fetch": "^3.2.4",
     "pluralize": "^8.0.0",
     "semver": "^7.3.4",
     "then-request": "^6.0.2",
+    "timers": "^0.1.1",
+    "tinybuild": "^0.3.98",
     "xml2js": "^0.4.23"
   },
   "devDependencies": {
@@ -50,7 +62,8 @@
     }
   },
   "jest": {
-    "testEnvironment": "node"
+    "testEnvironment": "node",
+    "transform": {}
   },
   "browser": {
     "fs": false

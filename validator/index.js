@@ -1,9 +1,9 @@
-const BIDS = require('./bids')
-const dataset = require('./dataset')
-const event = require('./event')
-const schema = require('./schema/init')
+import * as BIDS from './bids/index.js'
+import * as dataset from './dataset.js'
+import * as event from './event/index.js'
+import * as schema from './schema/init.js'
 
-module.exports = {
+export default  {
   BidsDataset: BIDS.BidsDataset,
   BidsEventFile: BIDS.BidsEventFile,
   BidsSidecar: BIDS.BidsSidecar,

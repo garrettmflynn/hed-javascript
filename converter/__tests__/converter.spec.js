@@ -1,7 +1,7 @@
-const assert = require('chai').assert
-const converter = require('../converter')
-const schema = require('../schema')
-const generateIssue = require('../issues')
+import {assert} from 'chai'
+import * as converter from '../converter.js'
+import * as schema from '../schema.js'
+import generateIssue from '../issues.js'
 
 describe('HED string conversion', () => {
   const hedSchemaFile = 'tests/data/HED8.0.0.xml'

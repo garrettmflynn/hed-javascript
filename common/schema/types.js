@@ -1,6 +1,6 @@
 /** HED schema classes */
 
-const { getGenerationForSchemaVersion } = require('../../utils/hed')
+import { getGenerationForSchemaVersion } from '../../utils/hed.js'
 
 /**
  * An imported HED schema object.
@@ -165,9 +165,9 @@ class Schemas {
   }
 }
 
-module.exports = {
-  Schema: Schema,
-  Hed2Schema: Hed2Schema,
-  Hed3Schema: Hed3Schema,
-  Schemas: Schemas,
+export {
+  Schema,
+  Hed2Schema,
+  Hed3Schema,
+  Schemas,
 }

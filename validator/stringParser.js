@@ -1,14 +1,13 @@
-const utils = require('../utils')
-const { hedStringIsAGroup, removeGroupParentheses } = require('../utils/hed')
-const { generateIssue } = require('../common/issues/issues')
+import utils from '../utils/index.js'
+import { generateIssue } from '../common/issues/issues.js'
 
-const {
+import {
   ParsedHedTag,
   ParsedHed2Tag,
   ParsedHed3Tag,
   ParsedHedGroup,
   ParsedHedString,
-} = require('./types/parsedHed')
+} from './types/parsedHed.js'
 
 const openingGroupCharacter = '('
 const closingGroupCharacter = ')'
@@ -127,8 +126,8 @@ const findTagGroups = function (
   const issues = []
   const copiedGroupTagsList = groupTagsList.slice()
   copiedGroupTagsList.forEach((tagOrGroup, index) => {
-    if (hedStringIsAGroup(tagOrGroup.originalTag)) {
-      const tagGroupString = removeGroupParentheses(tagOrGroup.originalTag)
+    if (utils.HED.hedStringIsAGroup(tagOrGroup.originalTag)) {
+      const tagGroupString = utils.HED.removeGroupParentheses(tagOrGroup.originalTag)
       // Split the group tag and recurse.
       const [nestedGroupTagList, nestedGroupIssues] = splitHedString(
         tagGroupString,
@@ -179,7 +178,7 @@ const findTagGroups = function (
 const findTopLevelTags = function (hedTags, hedSchemas, parsedString) {
   const topLevelTags = []
   for (const tagOrGroup of hedTags) {
-    if (!hedStringIsAGroup(tagOrGroup.originalTag)) {
+    if (!utils.HED.hedStringIsAGroup(tagOrGroup.originalTag)) {
       topLevelTags.push(tagOrGroup)
       if (!parsedString.tags.includes(tagOrGroup)) {
         parsedString.tags.push(tagOrGroup)
@@ -400,8 +399,8 @@ const parseHedStrings = function (hedStrings, hedSchemas) {
     )
 }
 
-module.exports = {
-  splitHedString: splitHedString,
-  parseHedString: parseHedString,
-  parseHedStrings: parseHedStrings,
+export {
+  splitHedString,
+  parseHedString,
+  parseHedStrings,
 }

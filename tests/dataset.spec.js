@@ -1,8 +1,8 @@
-const assert = require('chai').assert
-const hed = require('../validator/dataset')
-const schema = require('../validator/schema/init')
-const generateValidationIssue = require('../common/issues/issues').generateIssue
-const generateConverterIssue = require('../converter/issues')
+import {assert} from 'chai'
+import * as hed from '../validator/dataset'
+import * as schema from '../validator/schema/init'
+import {generateIssue as generateValidationIssue} from '../common/issues/issues'
+import generateConverterIssue from '../converter/issues'
 
 describe('HED dataset validation', () => {
   const hedSchemaFile = 'tests/data/HED8.0.0.xml'

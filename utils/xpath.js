@@ -89,6 +89,6 @@ const search = function (element, elementName, attributeName) {
   return result
 }
 
-module.exports = {
-  find: find,
+export {
+  find,
 }

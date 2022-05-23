@@ -1,10 +1,10 @@
-const { parseHedString } = require('../stringParser')
-const { ParsedHedString } = require('../types/parsedHed')
-const { buildSchemaAttributesObject } = require('../schema/init')
-const { Schemas } = require('../../common/schema')
+import { parseHedString } from '../stringParser.js'
+import { ParsedHedString } from '../types/parsedHed.js'
+import { buildSchemaAttributesObject } from '../schema/init.js'
+import { Schemas } from '../../common/schema/index.js'
 
-const { HedValidator, Hed2Validator } = require('./validator')
-const { Hed3Validator } = require('./hed3')
+import { HedValidator, Hed2Validator } from './validator.js'
+import { Hed3Validator } from './hed3.js'
 
 /**
  * Perform initial validation on a HED string and parse it so further validation can be performed.
@@ -21,6 +21,7 @@ const initiallyValidateHedString = function (
   options,
   definitions = null,
 ) {
+
   let doSemanticValidation = hedSchemas instanceof Schemas
   if (!doSemanticValidation) {
     hedSchemas = new Schemas(null)
@@ -155,8 +156,8 @@ const validateHedEventWithDefinitions = function (
   return [issues.length === 0, issues]
 }
 
-module.exports = {
-  validateHedString: validateHedString,
-  validateHedEvent: validateHedEvent,
-  validateHedEventWithDefinitions: validateHedEventWithDefinitions,
+export {
+  validateHedString,
+  validateHedEvent,
+  validateHedEventWithDefinitions,
 }

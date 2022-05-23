@@ -58,9 +58,9 @@ function recursiveMap(fn, array) {
   }
 }
 
-module.exports = {
-  getElementCount: getElementCount,
-  flattenDeep: flattenDeep,
-  asArray: asArray,
-  recursiveMap: recursiveMap,
+export {
+  getElementCount,
+  flattenDeep,
+  asArray,
+  recursiveMap,
 }

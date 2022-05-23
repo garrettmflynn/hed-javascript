@@ -1,10 +1,6 @@
-const config = require('./config')
-const loadSchema = require('./loader')
-const { Schema, Schemas } = require('./types')
-
-module.exports = {
-  loadSchema: loadSchema,
-  Schema: Schema,
-  Schemas: Schemas,
-  config: config,
+import * as config from './config.js'
+export {loadSchema}  from './loader.js'
+export { Schema, Schemas } from './types.js'
+export {
+    config
 }

@@ -1,5 +1,5 @@
-const assert = require('chai').assert
-const splitHedString = require('../splitHedString')
+import {assert} from 'chai'
+import splitHedString from '../splitHedString.js'
 
 describe('HED string delimiter splitting', () => {
   /**

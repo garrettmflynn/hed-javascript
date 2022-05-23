@@ -1,6 +1,6 @@
-const assert = require('chai').assert
-const schema = require('../validator/schema/init')
-const schemaCommon = require('../common/schema')
+import {assert} from 'chai'
+import * as schema from '../validator/schema/init'
+import * as schemaCommon from '../common/schema'
 const fallbackHedSchemaPath = schemaCommon.config.fallbackFilePath
 
 describe('HED schemas', () => {

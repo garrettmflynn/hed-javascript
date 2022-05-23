@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>HED Validator</title>
+    <script src='./dist/index.esm.js'></script>
+</head>
+<body>
+  <input type=file accept=".xml">
+</body>
+<script type="module">
+  import './examples/esm/index.js'
+  // import * as hed from './dist/index.esm.js' // Not working. Must use Browserify (for xml2js)
+
+  // ----------------------------- Browser-Specific Demo -----------------------------
+  const validHedString5 =
+    'Event/Category/Experimental stimulus,Item/Object/Vehicle/Train,Attribute/Visual/Color/Purple'
+
+  const fileEl = document.querySelector('input[type="file"]')
+  fileEl.onchange = async () => {
+    const file = fileEl.files[0]
+    
+
+    const hedSchema = await hed.validator
+    .buildSchema(file).catch(e => {
+      console.log('[5 Browser]', e)
+    })
+
+      // Validate
+      const [
+        isValid5Browser,
+        issues5Browser,
+      ] = hed.validator.validateHedString(validHedString5, hedSchema)
+      // Do something with results...
+
+
+      console.log('Browser')
+      console.log('Is Valid', isValid5Browser)
+      console.log('Issues', issues5Browser)
+
+  }
+  
+</script>
+</html>

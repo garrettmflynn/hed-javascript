@@ -1,13 +1,13 @@
-const differenceWith = require('lodash/differenceWith')
+import differenceWith from 'lodash/differenceWith'
 
-const { Memoizer } = require('../../utils/types')
+import { Memoizer } from '../../utils/types.js'
 
-const {
+import {
   getTagSlashIndices,
   replaceTagNameWithPound,
   getTagName,
-} = require('../../utils/hed')
-const { convertPartialHedStringToLong } = require('../../converter/converter')
+} from '../../utils/hed.js'
+import { convertPartialHedStringToLong } from '../../converter/converter.js'
 
 /**
  * A parsed HED substring.
@@ -663,10 +663,10 @@ class ParsedHedString {
   }
 }
 
-module.exports = {
-  ParsedHedTag: ParsedHedTag,
-  ParsedHed2Tag: ParsedHed2Tag,
-  ParsedHed3Tag: ParsedHed3Tag,
-  ParsedHedGroup: ParsedHedGroup,
-  ParsedHedString: ParsedHedString,
+export {
+  ParsedHedTag,
+  ParsedHed2Tag,
+  ParsedHed3Tag,
+  ParsedHedGroup,
+  ParsedHedString,
 }

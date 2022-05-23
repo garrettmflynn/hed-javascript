@@ -7,7 +7,14 @@ This package contains a JavaScript validator for HED (hierarchical event descrip
 The HED annotation strategy is very general and a standardized vocabulary for a particular domain can be represented using a HED schema. HED provides one [standardized schema](https://github.com/hed-standard/hed-specification) for annotating events in neuroimaging experiments. Validation of HED strings against a particular HED schema is called semantic validation. Semantic validation is currently supported for the [web version of the HED validator](http://visual.cs.utsa.edu/hed).
 
 ## Usage
+### Browser
+#### Local
+1. Run `browserify index.js -p esmify -o bundle.js`
+2. Serve the `index.html` page
+3. Enjoy the examples!
 
+
+### Node
 To use the validator, follow these instructions:
 
 1. Install the npm package `hed-validator`.

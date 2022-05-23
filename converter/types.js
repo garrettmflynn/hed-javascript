@@ -49,7 +49,7 @@ class Mapping {
   }
 }
 
-module.exports = {
-  TagEntry: TagEntry,
-  Mapping: Mapping,
+export   {
+  TagEntry,
+  Mapping,
 }

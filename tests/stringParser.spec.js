@@ -1,11 +1,11 @@
-const assert = require('chai').assert
-const { Schemas } = require('../common/schema')
-const { buildSchema } = require('../converter/schema')
-const { parseHedString, splitHedString } = require('../validator/stringParser')
-const { ParsedHedTag } = require('../validator/types/parsedHed')
-const { generateIssue } = require('../common/issues/issues')
-const converterGenerateIssue = require('../converter/issues')
-const { recursiveMap } = require('../utils/array')
+import {assert} from 'chai'
+import { Schemas } from '../common/schema'
+import { buildSchema } from '../converter/schema'
+import { parseHedString, splitHedString } from '../validator/stringParser'
+import { ParsedHedTag } from '../validator/types/parsedHed'
+import { generateIssue } from '../common/issues/issues'
+import converterGenerateIssue from '../converter/issues'
+import { recursiveMap } from '../utils/array'
 
 describe('HED string parsing', () => {
   const nullSchema = new Schemas(null)

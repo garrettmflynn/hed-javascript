@@ -1,13 +1,14 @@
-const semver = require('semver')
+import semver from 'semver'
 
-const loadSchema = require('../../common/schema/loader')
-const { Schemas, Hed2Schema, Hed3Schema } = require('../../common/schema/types')
+import { loadSchema } from '../../common/schema/loader.js'
+import { Schemas, Hed2Schema, Hed3Schema } from '../../common/schema/types.js'
 
-const { buildMappingObject } = require('../../converter/schema')
-const { setParent } = require('../../utils/xml2js')
+import { buildMappingObject } from '../../converter/schema.js'
+import { setParent } from '../../utils/xml2js.js'
 
-const { Hed2SchemaParser } = require('./hed2')
-const { HedV8SchemaParser } = require('./hed3')
+import {Hed2SchemaParser} from './hed2.js'
+
+import {HedV8SchemaParser} from './hed3.js'
 
 /**
  * Build a schema attributes object from schema XML data.
@@ -47,7 +48,7 @@ const buildSchema = function (schemaDef = {}, useFallback = true) {
   })
 }
 
-module.exports = {
-  buildSchema: buildSchema,
-  buildSchemaAttributesObject: buildSchemaAttributesObject,
+export {
+  buildSchema,
+  buildSchemaAttributesObject,
 }

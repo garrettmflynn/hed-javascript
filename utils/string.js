@@ -1,6 +1,6 @@
-const date = require('date-and-time')
-const parseISO = require('date-fns/parseISO')
-const dateIsValid = require('date-fns/isValid')
+import date from 'date-and-time'
+import parseISO from 'date-fns/parseISO'
+import dateIsValid from 'date-fns/isValid'
 const rfc3339ish = /^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}(.\d+)?$/
 const digitExpression = /^-?\d+(?:\.\d+)?(?:[Ee]-?\d+)?$/
 
@@ -90,12 +90,12 @@ const stringTemplate = function (strings, ...keys) {
   }
 }
 
-module.exports = {
-  stringIsEmpty: stringIsEmpty,
-  getCharacterCount: getCharacterCount,
-  capitalizeString: capitalizeString,
-  isClockFaceTime: isClockFaceTime,
-  isDateTime: isDateTime,
-  isNumber: isNumber,
-  stringTemplate: stringTemplate,
+export {
+  stringIsEmpty,
+  getCharacterCount,
+  capitalizeString,
+  isClockFaceTime,
+  isDateTime,
+  isNumber,
+  stringTemplate,
 }

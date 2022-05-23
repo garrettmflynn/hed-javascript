@@ -1,5 +1,5 @@
-const assert = require('assert')
-const utils = require('../')
+import assert from 'assert'
+import utils from '../index.js'
 
 describe('Array utility functions', () => {
   describe('Element counts', () => {

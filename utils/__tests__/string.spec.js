@@ -1,5 +1,5 @@
-const assert = require('assert')
-const utils = require('../')
+import assert from 'assert'
+import utils from '../'
 
 describe('String utility functions', () => {
   describe('Blank strings', () => {

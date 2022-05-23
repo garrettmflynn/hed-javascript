@@ -1,17 +1,17 @@
-const {
+import {
   validateHedString,
   validateHedEvent,
   validateHedEventWithDefinitions,
-} = require('./init')
+} from './init.js'
 
-const { HedValidator, Hed2Validator } = require('./validator')
-const { Hed3Validator } = require('./hed3')
+import { HedValidator, Hed2Validator } from './validator.js'
+import { Hed3Validator } from './hed3.js'
 
-module.exports = {
-  HedValidator: HedValidator,
-  Hed2Validator: Hed2Validator,
-  Hed3Validator: Hed3Validator,
-  validateHedString: validateHedString,
-  validateHedEvent: validateHedEvent,
-  validateHedEventWithDefinitions: validateHedEventWithDefinitions,
+export {
+  HedValidator,
+  Hed2Validator,
+  Hed3Validator,
+  validateHedString,
+  validateHedEvent,
+  validateHedEventWithDefinitions,
 }

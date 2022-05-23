@@ -1,9 +1,9 @@
-const pluralize = require('pluralize')
+import pluralize from 'pluralize'
 pluralize.addUncountableRule('hertz')
 
 // Old-style types
 
-const { Memoizer } = require('../../utils/types')
+import { Memoizer } from '../../utils/types.js'
 
 /**
  * A description of a HED schema's attributes.
@@ -474,17 +474,17 @@ class SchemaTag extends SchemaEntry {
   }
 }
 
-module.exports = {
-  nodeProperty: nodeProperty,
-  attributeProperty: attributeProperty,
-  SchemaAttributes: SchemaAttributes,
-  SchemaEntries: SchemaEntries,
-  SchemaEntryManager: SchemaEntryManager,
-  SchemaProperty: SchemaProperty,
-  SchemaAttribute: SchemaAttribute,
-  SchemaTag: SchemaTag,
-  SchemaUnit: SchemaUnit,
-  SchemaUnitClass: SchemaUnitClass,
-  SchemaUnitModifier: SchemaUnitModifier,
-  SchemaValueClass: SchemaValueClass,
+export {
+  nodeProperty,
+  attributeProperty,
+  SchemaAttributes,
+  SchemaEntries,
+  SchemaEntryManager,
+  SchemaProperty,
+  SchemaAttribute,
+  SchemaTag,
+  SchemaUnit,
+  SchemaUnitClass,
+  SchemaUnitModifier,
+  SchemaValueClass,
 }

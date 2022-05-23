@@ -1,11 +1,11 @@
-const arrayUtils = require('../../utils/array')
+import * as arrayUtils from '../../utils/array.js'
 
 // TODO: Switch require once upstream bugs are fixed.
-// const xpath = require('xml2js-xpath')
+// import xpath from 'xml2js-xpath'
 // Temporary
-const xpath = require('../../utils/xpath')
+import * as xpath from '../../utils/xpath.js'
 
-class SchemaParser {
+export class SchemaParser {
   constructor(rootElement) {
     this.rootElement = rootElement
   }
@@ -89,8 +89,4 @@ class SchemaParser {
     }
     return lowercaseDictionary
   }
-}
-
-module.exports = {
-  SchemaParser: SchemaParser,
 }

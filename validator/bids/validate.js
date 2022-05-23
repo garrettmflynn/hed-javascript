@@ -1,10 +1,10 @@
-const { validateHedDatasetWithContext } = require('../dataset')
-const { validateHedString } = require('../event')
-const { buildSchema } = require('../schema/init')
-const { sidecarValueHasHed } = require('../../utils/bids')
-const { generateIssue } = require('../../common/issues/issues')
-const { fallbackFilePath } = require('../../common/schema')
-const { BidsDataset, BidsHedIssue, BidsIssue } = require('./types')
+import { validateHedDatasetWithContext } from '../dataset.js'
+import { validateHedString } from '../event/index.js'
+import { buildSchema } from '../schema/init.js'
+// import { sidecarValueHasHed } from '../../utils/bids.js'
+import { generateIssue } from '../../common/issues/issues.js'
+import { config } from '../../common/schema/index.js'
+import { BidsDataset, BidsHedIssue, BidsIssue } from './types.js'
 
 function generateInternalErrorBidsIssue(error) {
   return Promise.resolve([new BidsIssue(107, null, error.message)])
@@ -31,7 +31,7 @@ function validateBidsDataset(dataset, schemaDefinition) {
           dataset.datasetDescription.file,
         ),
       )
-      return buildBidsSchema(dataset, { path: fallbackFilePath }).catch(
+      return buildBidsSchema(dataset, { path: config.fallbackFilePath }).catch(
         (error) => {
           schemaLoadIssues.push(
             new BidsHedIssue(
@@ -242,4 +242,4 @@ function convertHedIssuesToBidsIssues(hedIssues, file) {
   return hedIssues.map((hedIssue) => new BidsHedIssue(hedIssue, file))
 }
 
-module.exports = validateBidsDataset
+export default validateBidsDataset

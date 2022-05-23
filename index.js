@@ -1,7 +1,12 @@
-const converter = require('./converter')
-const validator = require('./validator')
+import converter from './converter/index.js'
+import validator from './validator/index.js'
 
-module.exports = {
-  converter: converter,
-  validator: validator,
+globalThis.hed = {
+  converter,
+  validator
+}
+
+export {
+  converter,
+  validator
 }

@@ -1,4 +1,4 @@
-const isEqual = require('lodash/isEqual')
+import isEqual from 'lodash/isEqual'
 
 /**
  * Filter non-equal duplicates from a key-value list,
@@ -28,6 +28,6 @@ const filterNonEqualDuplicates = function (list, equalityFunction = isEqual) {
   return [map, duplicates]
 }
 
-module.exports = {
-  filterNonEqualDuplicates: filterNonEqualDuplicates,
+export {
+  filterNonEqualDuplicates,
 }

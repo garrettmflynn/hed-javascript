@@ -1,14 +1,14 @@
-const assert = require('chai').assert
-const converterGenerateIssue = require('../converter/issues')
-const { generateIssue } = require('../common/issues/issues')
-const {
+import {assert} from 'chai'
+import converterGenerateIssue from '../converter/issues'
+import { generateIssue } from '../common/issues/issues'
+import {
   BidsDataset,
   BidsEventFile,
   BidsHedIssue,
   BidsIssue,
   BidsSidecar,
   validateBidsDataset,
-} = require('../validator/bids')
+} from '../validator/bids'
 
 describe('BIDS datasets', () => {
   const sidecars = [

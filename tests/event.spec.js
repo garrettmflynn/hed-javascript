@@ -1,16 +1,16 @@
-const assert = require('chai').assert
-const hed = require('../validator/event')
-const schema = require('../validator/schema/init')
-const { parseHedString } = require('../validator/stringParser')
-const { ParsedHedTag } = require('../validator/types/parsedHed')
-const {
+import {assert} from 'chai'
+import * as hed from '../validator/event'
+import * as schema from '../validator/schema/init'
+import { parseHedString } from '../validator/stringParser'
+import { ParsedHedTag } from '../validator/types/parsedHed'
+import {
   HedValidator,
   Hed2Validator,
   Hed3Validator,
-} = require('../validator/event')
-const { generateIssue } = require('../common/issues/issues')
-const converterGenerateIssue = require('../converter/issues')
-const { Schemas } = require('../common/schema')
+} from '../validator/event'
+import { generateIssue } from '../common/issues/issues'
+import converterGenerateIssue from '../converter/issues'
+import { Schemas } from '../common/schema'
 
 describe('HED string and event validation', () => {
   /**

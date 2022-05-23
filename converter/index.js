@@ -1,8 +1,8 @@
-const converter = require('./converter')
-const schema = require('./schema')
+import {convertHedStringToShort,convertHedStringToLong } from './converter.js'
+import {buildSchema} from './schema.js'
 
-module.exports = {
-  buildSchema: schema.buildSchema,
-  convertHedStringToShort: converter.convertHedStringToShort,
-  convertHedStringToLong: converter.convertHedStringToLong,
+export default {
+  buildSchema,
+  convertHedStringToShort,
+  convertHedStringToLong,
 }

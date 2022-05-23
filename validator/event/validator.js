@@ -1,7 +1,7 @@
-const utils = require('../../utils')
-const { ParsedHedString, ParsedHedTag } = require('../types/parsedHed')
-const { generateIssue } = require('../../common/issues/issues')
-const { Schemas } = require('../../common/schema')
+import utils from '../../utils/index.js'
+import { ParsedHedString, ParsedHedTag } from '../types/parsedHed.js'
+import { generateIssue } from '../../common/issues/issues.js'
+import { Schemas } from '../../common/schema/index.js'
 
 const uniqueType = 'unique'
 const requiredType = 'required'
@@ -512,7 +512,7 @@ class Hed2Validator extends HedValidator {
   }
 }
 
-module.exports = {
-  HedValidator: HedValidator,
-  Hed2Validator: Hed2Validator,
+export   {
+  HedValidator,
+  Hed2Validator,
 }

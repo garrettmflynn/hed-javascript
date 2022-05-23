@@ -2,13 +2,12 @@
 
 /* Imports */
 
-const isEmpty = require('lodash/isEmpty')
-const xml2js = require('xml2js')
+import isEmpty from 'lodash/isEmpty'
+import * as files from '../../utils/files'
+import * as utils from '../../utils/string'
+import xml2js from 'xml2js'
 
-const files = require('../../utils/files')
-const { stringTemplate } = require('../../utils/string')
-
-const { fallbackFilePath } = require('./config')
+import { fallbackFilePath } from './config'
 
 /**
  * Load schema XML data from a schema version or path description.
@@ -18,26 +17,35 @@ const { fallbackFilePath } = require('./config')
  * @return {Promise<never>|Promise<object>} The schema XML data or an error.
  */
 const loadSchema = function (schemaDef = {}, useFallback = true) {
-  if (isEmpty(schemaDef)) {
-    schemaDef.version = 'Latest'
-  }
-  let schemaPromise
-  if (schemaDef.path) {
-    schemaPromise = loadLocalSchema(schemaDef.path)
-  } /* else if (schemaDef.library) {
+    if (isEmpty(schemaDef)) {
+      schemaDef.version = 'Latest'
+    }
+    let schemaPromise
+
+  // Browser Only
+  if (globalThis.File && schemaDef instanceof globalThis.File) {
+    schemaPromise = loadBrowserSchema(schemaDef)
+  } 
+  
+  // Browser + Node Compatible Code
+  else if (schemaDef.path) {
+      schemaPromise = loadLocalSchema(schemaDef.path)
+    } /* else if (schemaDef.library) {
     return loadRemoteLibrarySchema(schemaDef.library, schemaDef.version)
   } */ else if (schemaDef.version) {
-    schemaPromise = loadRemoteBaseSchema(schemaDef.version)
-  } else {
-    return Promise.reject(new Error('Invalid schema definition format.'))
-  }
-  return schemaPromise.catch((error) => {
-    if (useFallback) {
-      return loadLocalSchema(fallbackFilePath)
+      schemaPromise = loadRemoteBaseSchema(schemaDef.version)
     } else {
-      throw error
+      return Promise.reject(new Error('Invalid schema definition format.'))
     }
-  })
+
+    return schemaPromise.catch((error) => {
+      if (!useFallback || error.message === files.browserError) {
+        throw error
+      } else { // Catch loadLocalSchema() method error
+        return loadLocalSchema(fallbackFilePath)
+      }
+    })
+
 }
 
 /**
@@ -50,7 +58,7 @@ const loadRemoteBaseSchema = function (version = 'Latest') {
   const url = `https://raw.githubusercontent.com/hed-standard/hed-specification/master/hedxml/HED${version}.xml`
   return loadSchemaFile(
     files.readHTTPSFile(url),
-    stringTemplate`Could not load HED base schema, version "${1}", from remote repository - "${0}".`,
+    utils.stringTemplate`Could not load HED base schema, version "${1}", from remote repository - "${0}".`,
     ...arguments,
   )
 }
@@ -66,7 +74,7 @@ const loadRemoteLibrarySchema = function (library, version = 'Latest') {
   const url = `https://raw.githubusercontent.com/hed-standard/hed-schema-library/master/hedxml/HED_${library}_${version}.xml`
   return loadSchemaFile(
     files.readHTTPSFile(url),
-    stringTemplate`Could not load HED library schema ${1}, version "${2}", from remote repository - "${0}".`,
+    utils.stringTemplate`Could not load HED library schema ${1}, version "${2}", from remote repository - "${0}".`,
     ...arguments,
   )
 }
@@ -80,7 +88,21 @@ const loadRemoteLibrarySchema = function (library, version = 'Latest') {
 const loadLocalSchema = function (path) {
   return loadSchemaFile(
     files.readFile(path),
-    stringTemplate`Could not load HED schema from path "${1}" - "${0}".`,
+    utils.stringTemplate`Could not load HED schema from path "${1}" - "${0}".`,
+    ...arguments,
+  )
+}
+
+/**
+ * Load schema XML data from a browser-specified File object.
+ *
+ * @param {File} file A browser File object to load.
+ * @return {Promise<object>} The schema XML data.
+ */
+const loadBrowserSchema = function (file) {
+  return loadSchemaFile(
+    files.readBrowserFile(file),
+    utils.stringTemplate`Could not load HED schema from path "${1}" - "${0}".`,
     ...arguments,
   )
 }
@@ -105,8 +127,11 @@ const loadSchemaFile = function (xmlDataPromise, errorMessage, ...errorArgs) {
  * @param {string} data The XML data.
  * @return {Promise<object>} The schema XML data.
  */
-const parseSchemaXML = function (data) {
-  return xml2js.parseStringPromise(data, { explicitCharkey: true })
+
+const parseSchemaXML = async function (data) {
+  return await xml2js.parseStringPromise(data, { explicitCharkey: true })
 }
 
-module.exports = loadSchema
+export {
+  loadSchema
+}

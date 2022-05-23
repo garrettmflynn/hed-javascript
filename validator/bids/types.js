@@ -1,6 +1,6 @@
-const { ParsedHedString, ParsedHedGroup } = require('../stringParser')
-const { sidecarValueHasHed } = require('../../utils/bids')
-const { Issue } = require('../../common/issues/issues')
+import { ParsedHedGroup, ParsedHedString } from '../types/parsedHed.js'
+import { sidecarValueHasHed } from '../../utils/bids.js'
+import { Issue } from '../../common/issues/issues.js'
 
 class BidsData {
   constructor() {
@@ -160,11 +160,11 @@ class BidsHedIssue extends BidsIssue {
   }
 }
 
-module.exports = {
-  BidsDataset: BidsDataset,
-  BidsEventFile: BidsEventFile,
-  BidsHedIssue: BidsHedIssue,
-  BidsIssue: BidsIssue,
-  BidsJsonFile: BidsJsonFile,
-  BidsSidecar: BidsSidecar,
+export {
+  BidsDataset,
+  BidsEventFile,
+  BidsHedIssue,
+  BidsIssue,
+  BidsJsonFile,
+  BidsSidecar,
 }

@@ -1,4 +1,4 @@
-const issuesUtil = require('../common/issues/issues')
+import * as issuesUtil from '../common/issues/issues.js'
 
 /**
  * Generate an issue object for tag conversion.
@@ -20,4 +20,4 @@ const generateIssue = function (code, hedString, parameters = {}, bounds = []) {
   return issue
 }
 
-module.exports = generateIssue
+export default generateIssue

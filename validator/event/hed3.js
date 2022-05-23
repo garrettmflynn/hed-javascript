@@ -1,7 +1,7 @@
-const utils = require('../../utils')
-const { ParsedHedGroup, ParsedHedTag } = require('../types/parsedHed')
+import utils from '../../utils/index.js'
+import { ParsedHedGroup, ParsedHedTag } from '../types/parsedHed.js'
 
-const { HedValidator } = require('./validator')
+import { HedValidator } from './validator.js'
 
 const tagGroupType = 'tagGroup'
 const topLevelTagGroupType = 'topLevelTagGroup'
@@ -328,6 +328,6 @@ class Hed3Validator extends HedValidator {
   }
 }
 
-module.exports = {
-  Hed3Validator: Hed3Validator,
+export {
+  Hed3Validator,
 }

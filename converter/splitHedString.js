@@ -69,4 +69,4 @@ const splitHedString = function (hedString) {
   return resultPositions
 }
 
-module.exports = splitHedString
+export default splitHedString

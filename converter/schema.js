@@ -1,15 +1,13 @@
 // TODO: Switch require once upstream bugs are fixed.
-// const xpath = require('xml2js-xpath')
+// import xpath from 'xml2js-xpath'
 // Temporary
-const xpath = require('../utils/xpath')
+import * as xpath from '../utils/xpath.js'
 
-const schemaUtils = require('../common/schema')
-const { asArray } = require('../utils/array')
-const { setParent } = require('../utils/xml2js')
+import * as schemaUtils from '../common/schema/index.js'
+import { asArray } from '../utils/array.js'
+import { setParent } from '../utils/xml2js.js'
 
-const types = require('./types')
-const TagEntry = types.TagEntry
-const Mapping = types.Mapping
+import {TagEntry, Mapping} from './types.js'
 
 /**
  * Build a short-long mapping object from schema XML data.
@@ -81,13 +79,14 @@ const getParentTagName = function (tagElement) {
  */
 const buildSchema = function (schemaDef = {}) {
   return schemaUtils.loadSchema(schemaDef).then((xmlData) => {
+    console.log('xmlData', xmlData)
     const mapping = buildMappingObject(xmlData)
     const baseSchema = new schemaUtils.Schema(xmlData, undefined, mapping)
     return new schemaUtils.Schemas(baseSchema)
   })
 }
 
-module.exports = {
-  buildSchema: buildSchema,
-  buildMappingObject: buildMappingObject,
+export {
+  buildSchema,
+  buildMappingObject,
 }

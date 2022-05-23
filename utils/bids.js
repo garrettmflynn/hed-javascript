@@ -12,6 +12,6 @@ const sidecarValueHasHed = function (sidecarValue) {
   )
 }
 
-module.exports = {
-  sidecarValueHasHed: sidecarValueHasHed,
+export {
+  sidecarValueHasHed,
 }

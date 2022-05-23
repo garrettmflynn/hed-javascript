@@ -1,9 +1,9 @@
-const pluralize = require('pluralize')
+import pluralize from 'pluralize'
 pluralize.addUncountableRule('hertz')
 
-const lt = require('semver/functions/lt')
+import lt from 'semver/functions/lt'
 
-const { isNumber } = require('./string')
+import { isNumber } from './string'
 
 const tagsDictionaryKey = 'tags'
 const unitClassType = 'unitClass'
@@ -246,14 +246,14 @@ const getGenerationForSchemaVersion = function (version) {
   }
 }
 
-module.exports = {
-  replaceTagNameWithPound: replaceTagNameWithPound,
-  getTagSlashIndices: getTagSlashIndices,
-  getTagName: getTagName,
-  getParentTag: getParentTag,
-  hedStringIsAGroup: hedStringIsAGroup,
-  removeGroupParentheses: removeGroupParentheses,
-  validateValue: validateValue,
-  validateUnits: validateUnits,
-  getGenerationForSchemaVersion: getGenerationForSchemaVersion,
+export {
+  replaceTagNameWithPound,
+  getTagSlashIndices,
+  getTagName,
+  getParentTag,
+  hedStringIsAGroup,
+  removeGroupParentheses,
+  validateValue,
+  validateUnits,
+  getGenerationForSchemaVersion,
 }

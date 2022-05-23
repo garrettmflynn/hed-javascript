@@ -1,7 +1,7 @@
-const assert = require('chai').assert
-const isEqual = require('lodash/isEqual')
+import {assert} from 'chai'
+import isEqual from 'lodash/isEqual'
 
-const mapUtils = require('../map')
+import * as mapUtils from '../map'
 
 describe('Map utility functions', () => {
   describe('Non-equal duplicate filtering', () => {
