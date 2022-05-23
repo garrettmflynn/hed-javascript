@@ -6,20 +6,39 @@ This package contains a JavaScript validator for HED (hierarchical event descrip
 
 The HED annotation strategy is very general and a standardized vocabulary for a particular domain can be represented using a HED schema. HED provides one [standardized schema](https://github.com/hed-standard/hed-specification) for annotating events in neuroimaging experiments. Validation of HED strings against a particular HED schema is called semantic validation. Semantic validation is currently supported for the [web version of the HED validator](http://visual.cs.utsa.edu/hed).
 
-## Usage
-### Browser
-#### Local
-1. Run `browserify index.js -p esmify -o bundle.js`
-2. Serve the `index.html` page
-3. Enjoy the examples!
+## Installation
+### Script (browser)
+*Coming soon...*
+
+```html
+<script src="https://cdn.jsdelivr.net/npm/hed-validator">
+```
+
+### ESM (cross-platform)
+*Coming soon...*
+
+```html
+<script type="module">
+  import * as hedValidator from "https://cdn.jsdelivr.net/npm/hed-validator/dist/index.esm.js"
+</script>
+```
+
+To use the ESM package in Node, you must install the npm package `hed-validator`.
+
+```js
+import * as hedValidator from "hed-validator/dist/index.esm.js"
+```
+
+### CommonJS (node)
+To use the CommonJS package, you must install the npm package `hed-validator`.
+
+```js
+const hedValidator = require("hed-validator")
+```
 
 
-### Node
-To use the validator, follow these instructions:
-
-1. Install the npm package `hed-validator`.
-1. Add `const hedValidator = require('hed-validator')`.
-1. (Semantic validation)
+## Getting Started
+### Semantic Validation
    1. Load a HED schema version using `hedValidator.validator.buildSchema()`. This returns a JavaScript `Promise` object. An optional object may be passed to `buildSchema()`. A `path` value is the path to a locally stored schema, while passing a `version` value will download that version. If no object or an empty object is passed, the latest version of the HED schema will be downloaded.
    1. Call the validator as follows (assuming `hedString` is the string to validate).
    ```javascript
@@ -30,7 +49,8 @@ To use the validator, follow these instructions:
      )
    })
    ```
-1. (Syntactic validation only) Call the validator as follows (assuming `hedString` is the string to validate). The second parameter is only required if checking for warnings.
+### Syntactic Validation Only
+ Call the validator as follows (assuming `hedString` is the string to validate). The second parameter is only required if checking for warnings.
    ```javascript
    const [result, issues] = hedValidator.validator.validateHedString(
      hedString,
@@ -41,14 +61,6 @@ To use the validator, follow these instructions:
 To check for warnings, pass `true` as the optional third argument.
 
 ## Examples
-
-All of the examples assume that the `hed-validator` has been loaded:
-
-```javascript
-// For all examples
-const hedValidator = require('hed-validator')
-```
-
 ### Example 1: Calling `hed-validator` on a valid HED string
 
 ```javascript
@@ -154,6 +166,7 @@ hedValidator.validator.buildSchema({ version: '7.0.4' }).then(hedSchema => {
 })
 
 // Load a local schema file.
+// NOTE: Node Only!
 hedValidator.validator
   .buildSchema({ path: '/path/to/schema/file' })
   .then(hedSchema => {

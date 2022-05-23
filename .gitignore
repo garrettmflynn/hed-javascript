@@ -3,4 +3,10 @@ node_modules
 .directory
 .idea
 
+# Bundler Outputs
 /dist
+
+# Package Manager Files
+*-error.log
+*.lock
+-lock.json
