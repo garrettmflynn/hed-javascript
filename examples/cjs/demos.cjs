@@ -1,5 +1,5 @@
 
-const valid = async (hed) => {
+const valid = async (hed, schema) => {
   console.log('%cCalling hed-validator on a valid HED string', 'font-weight: bold')
 
   // Initializing parameters and making the call
@@ -7,13 +7,14 @@ const valid = async (hed) => {
     'Event/Category/Experimental stimulus,Item/Object/Vehicle/Train,Attribute/Visual/Color/Purple'
   const [isValid1, issues1] = hed.validator.validateHedString(
     validHedString,
+    schema
   )
 
   console.log('Is Valid', isValid1)
   console.log('Issues', issues1)
 }
 
-const syntacticError = async (hed) => {
+const syntacticError = async (hed, schema) => {
 
   console.log('%cCalling hed-validator when the HED string has a syntactic error (mismatched parentheses)', 'font-weight: bold')
   // Initializing parameters and making the call
@@ -28,15 +29,16 @@ const syntacticError = async (hed) => {
 }
 
 
-const syntacticWarning = async (hed) => {
+const syntacticWarning = async (hed, schema) => {
   console.log('%cCalling hed-validator when the HED string has a syntactic warning (bad capitalization), but no errors', 'font-weight: bold')
   const warningHedString = 'Event/something'
   const [isErrorFree, errorIssues] = hed.validator.validateHedString(
     warningHedString,
+    schema
   )
   const [isWarningFree, warningIssues] = hed.validator.validateHedString(
     warningHedString,
-    {},
+    schema,
     true,
   )
 
@@ -46,24 +48,21 @@ const syntacticWarning = async (hed) => {
   console.log('Issues', warningIssues)
 }
 
-const semanticError = async (hed) => {
+const semanticError = async (hed, schema) => {
 
   console.log('%cCalling hed-validator when the HED string has a semantic error (invalid tag)', 'font-weight: bold')
 
   // Initialize parameter
   const invalidHedString4 = 'Item/Nonsense'
   // Build schema
-  hed.validator.buildSchema().then(hedSchema => {
     // Validate
     const [isValid4, issues4] = hed.validator.validateHedString(
       invalidHedString4,
-      hedSchema,
+      schema,
     )
     console.log('Is Valid', isValid4)
     console.log('Issues', issues4)
-  }).catch(e => {
-    console.log('[4] Error', e)
-  })
+
 }
 
 

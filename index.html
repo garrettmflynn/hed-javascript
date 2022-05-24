@@ -6,40 +6,133 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>HED Validator</title>
     <script src='./dist/index.esm.js'></script>
+    <style>
+
+      :root * {
+        box-sizing: border-box;
+      }
+
+      html, body {
+        margin: 0;
+      }
+
+      body {
+        padding: 25px;
+      }
+
+      h2 {
+        margin-bottom: 0;
+      }
+
+
+
+      input {
+        padding: 10px;
+        margin: 0px 10px;
+        width: 90%;
+      }
+      
+      /* Error Styling */
+      #issues {
+        margin-top: 10px;
+        font-size: 80%;
+      }
+
+      #issues * {
+        margin: 0;
+      }
+
+      .issue {
+        padding: 10px 0px;
+      }
+    
+    </style>
 </head>
 <body>
-  <input type=file accept=".xml">
+  <label for=tag>HED Tag</label>
+  <input id=tag type=text placeholder='Event/Category/Experimental stimulus,Item/Object/Vehicle/Train,Attribute/Visual/Color/Purple'></input>
+
+  
+  <h3>Default Tags</h3>
+  <button id="valid">Check Valid</button>
+  <button id="warning">Trigger Warning</button>
+  <button id="semantic">Semantic Error</button>
+  <button id="syntactic">Syntactic Error</button>
+
+  <h3>Load Schema</h3>
+  <input id=schema type=file accept=".xml">
+
+  <h2>Validator</h2>
+  <small id="mirror">N/A</small>
+  <div id=issues>
+
+  </div>
+
 </body>
 <script type="module">
-  import './examples/esm/index.js'
+  import {tags} from './examples/esm/index.js'
+
+  // ----------------------------- Grab All Relevalt HTML Tags -----------------------------
+  const tagInput = document.getElementById('tag')
+  const tagMirror = document.getElementById('mirror')
+  const issueDiv = document.getElementById('issues')
+  const validButton = document.getElementById('valid')
+  const warningButton = document.getElementById('warning')
+  const syntacticButton = document.getElementById('semantic')
+  const semanticButton = document.getElementById('syntactic')
+
+  // ----------------------------- Set Default Button Responses -----------------------------
+  
+  validButton.onclick = () => checkTag(tags.valid)
+  warningButton.onclick = () => checkTag(tags.warning)
+  syntacticButton.onclick = () => checkTag(tags.errors.semantic)
+  semanticButton.onclick = () => checkTag(tags.errors.syntactic)
+
   // import * as hed from './dist/index.esm.js' // Not working. Must use Browserify (for xml2js)
 
+  
   // ----------------------------- Browser-Specific Demo -----------------------------
-  const validHedString5 =
-    'Event/Category/Experimental stimulus,Item/Object/Vehicle/Train,Attribute/Visual/Color/Purple'
-
   const fileEl = document.querySelector('input[type="file"]')
+  
+  let schema = {}
+  let hedSchema = await hed.validator.buildSchema(schema)
+
+  const addIssue = issue => {
+    const div = document.createElement('div')
+    div.classList.add('issue')
+    div.innerHTML = `<h3>${issue.level} - ${issue.code}</h3><span>${issue.message}</span>`
+    issueDiv.appendChild(div)
+  }
+  
+  const checkTag = (tag) => {
+        const [ isValid, issues ] = hed.validator.validateHedString(tag, hedSchema, true)
+        tagMirror.innerHTML = tag
+        issueDiv.innerHTML = ''
+        if (isValid) issueDiv.innerHTML = 'This is a valid HED tag!'
+        else {
+        issues.forEach(issue => {
+          if (Array.isArray(issue)) issue.forEach(addIssue)
+          else addIssue(issue)
+        })
+      }
+  }
+
+
+
+  tagInput.oninput = (ev) => {
+    checkTag(ev.target.value)
+  }
+  
+  
+  
   fileEl.onchange = async () => {
-    const file = fileEl.files[0]
+    schema = fileEl.files[0]
     
 
-    const hedSchema = await hed.validator
-    .buildSchema(file).catch(e => {
-      console.log('[5 Browser]', e)
-    })
-
-      // Validate
-      const [
-        isValid5Browser,
-        issues5Browser,
-      ] = hed.validator.validateHedString(validHedString5, hedSchema)
-      // Do something with results...
-
-
-      console.log('Browser')
-      console.log('Is Valid', isValid5Browser)
-      console.log('Issues', issues5Browser)
-
+    hed.validator
+    .buildSchema(schema)
+    .then(res => hedSchema = res)
+    .catch(e => console.log('[SCHEMA]', e))
   }
   
 </script>

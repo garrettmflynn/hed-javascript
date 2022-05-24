@@ -4,7 +4,7 @@ node_modules
 .idea
 
 # Bundler Outputs
-/dist
+# /dist
 
 # Package Manager Files
 *-error.log

@@ -1,10 +1,15 @@
 const hed = require('../../dist/index.node.cjs')
 const demos = require('./demos.cjs')
 
-const startDemos = async () => {
-    for (let name in demos) {
-        await demos[name](hed)
-    }
-}
+hed.validator.buildSchema({}).then(schema => {
 
-startDemos()
+    const startDemos = async () => {
+        for (let name in demos) {
+            await demos[name](hed, schema)
+        }
+    }
+    
+    startDemos()
+
+})
+
